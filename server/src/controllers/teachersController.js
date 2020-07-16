@@ -4,10 +4,7 @@ class teachersController
 {
     async index(request, response)
     {
-        /*const teachers = await knex('teachers').select('*')
-
-        return response.json({teachers})*/
-
+        
         const {city, uf, subjects} = request.query;
 
         const parsedSubjects = String(subjects).split(',').map(subject => Number(subject.trim()))
@@ -23,7 +20,7 @@ class teachersController
             const serializedTeachers = teachers.map(teacher =>{
                 return {
                     ...teacher,
-                    image_url: `http://192.168.1.8:3333/uploads/${teacher.image}`,
+                    image_url: `${process.env.ADRESS_URL}:${process.env.PORT_SERVER}/uploads/${teacher.image}`,
                 }
             })
             
@@ -42,31 +39,19 @@ class teachersController
             return response.json({error: "User does not exists"})
         }
 
-        const subjects = await knex('teachers_subjects')
-            .where('teacher_id', '=', id)
-            .select('subject_id')
+        const subjects = await knex('subjects')
+            .join('teachers_subjects', 'subjects.id', '=', 'teachers_subjects.subject_id')
+            .where('teachers_subjects.teacher_id', id)
+            .select('subjects.title');
         
-        const names_subjects = []
-
-        subjects.map(subject => {
-            const {subject_id} = subject
-
-           /* const subject_name = await knex('subjects')
-                .where('id', '=', subject_id)
-                .select('image')
-
-            names_subjects.push(subject_name)*/
-        })
-
         const serializedTeacher = {
         
             ...user[0],
-            image_url: `http://192.168.1.8:3333/uploads/${user[0].image}`,
-           subjects : names_subjects
+            image_url: `${process.env.ADRESS_URL}:${process.env.PORT_SERVER}/uploads/${user[0].image}`,
+            subjects : subjects
             
         }
                 
-    
         return response.json(serializedTeacher)
     }
 
@@ -96,7 +81,7 @@ class teachersController
         const trx = await knex.transaction()
 
         const teacher = {
-            image: 'http://localhost:3333/uploads/adorable.png',
+            image: `${process.env.ADRESS_URL}:${process.env.PORT_SERVER}/uploads/adorable.png`,
             name,
             email,
             whatsaap,

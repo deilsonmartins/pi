@@ -10,7 +10,7 @@ class subjectsController
                 return {
                     id: subject.id,
                     name: subject.title,
-                    image_url: `http://192.168.1.8:3333/uploads/subjects/${subject.image}`,
+                    image_url: `${process.env.ADRESS_URL}:${process.env.PORT_SERVER}/uploads/subjects/${subject.image}`,
                 }
             })
             return response.json(serializedSubjects);

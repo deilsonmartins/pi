@@ -14,7 +14,7 @@ import * as MailComposer from 'expo-mail-composer';
 
 interface Params
 {
-  point_id: number;
+  teacher_id: number;
 }
 
 interface Data{
@@ -25,7 +25,7 @@ interface Data{
     whatsaap: string;
     city: string;
     uf: string;
-    subjects: [];
+    subjects: [{title: string}];
 }
 const Detail = () =>
 {
@@ -38,8 +38,12 @@ const Detail = () =>
 
   useEffect(() => 
   {
+    console.log(data)
+  })
+  useEffect(() => 
+  {
     
-    api.get(`teachers/${routeParams.point_id}`).then(response=>
+    api.get(`teachers/${routeParams.teacher_id}`).then(response=>
       {
           setData(response.data)
       })
@@ -72,15 +76,15 @@ function handleWhatsaap()
     <SafeAreaView style={{flex:1}}>
     <View style={styles.container}>
       <TouchableOpacity onPress={handleNavigateBack}>
-        <Icon name="arrow-left" size={20} color='#34cb70'/>
+        <Icon name="arrow-left" size={20} color='#0B2161'/>
       </TouchableOpacity>
-      <Image style={styles.pointImage} source={{uri: data.image_url}}/>
-      <Text style={styles.pointName}>{data.name}</Text>
+      <Image style={styles.Image} source={{uri: data.image_url}}/>
+      <Text style={styles.Name}>{data.name}</Text>
       
       <View style={styles.address}>
-            <Text style={styles.addressTitle}>Endereço</Text>
-            <Text style={styles.addressContent}>{data.city.toLocaleUpperCase()} / {data.uf.toLocaleUpperCase()}</Text>
-            <Text style={styles.pointItems}>{data.subjects.map(subject => subject).join(', ')}</Text>
+            <Text style={styles.addressTitle}>ADDRESS</Text>
+            <Text style={styles.addressContent}>{data.city? data.city.toUpperCase() : ''} / {data.uf? data.uf.toUpperCase() : ''}</Text>
+            <Text style={styles.Items}>{data.subjects ? data.subjects.map(subject => subject.title?subject.title.toUpperCase() : '').join(', ') : ''}</Text>
             
       </View>
     </View>
@@ -104,24 +108,27 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 32,
     paddingTop: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
-  pointImage: {
-    width: '100%',
+  Image: {
+    width: 120,
     height: 120,
     resizeMode: 'cover',
-    borderRadius: 10,
+    borderRadius: 100,
     marginTop: 32,
+   
   },
 
-  pointName: {
+  Name: {
     color: '#322153',
     fontSize: 28,
     fontFamily: 'Ubuntu_700Bold',
     marginTop: 24,
   },
 
-  pointItems: {
+  Items: {
     fontFamily: 'Roboto_400Regular',
     fontSize: 16,
     lineHeight: 24,
@@ -157,7 +164,7 @@ const styles = StyleSheet.create({
   
   button: {
     width: '48%',
-    backgroundColor: '#34CB79',
+    backgroundColor: '#0B2161',
     borderRadius: 10,
     height: 50,
     flexDirection: 'row',

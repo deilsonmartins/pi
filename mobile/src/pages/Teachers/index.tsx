@@ -108,10 +108,10 @@ const Teachers = () =>
 
   function handleNavigateDetail(id: number)
   {
-    navigation.navigate('Detail', {point_id: id});
+    navigation.navigate('Detail', {teacher_id: id});
   }
 
-  function handleSelectItem(id: number)
+  function handleSelectSubject(id: number)
     {
         const alreadySelected = selectedSubjects.findIndex(item => item === id)
 
@@ -179,7 +179,7 @@ const Teachers = () =>
                 styles.item,
                 selectedSubjects.includes(subject.id) ? styles.selectedItem : {}
               ]} 
-            onPress={() => {handleSelectItem(subject.id)}}
+            onPress={() => {handleSelectSubject(subject.id)}}
             activeOpacity={0.6}>
             <SvgUri width={42} height={42} uri={subject.image_url}/>
             <Text style={styles.itemTitle}>{subject.name}</Text>
@@ -231,11 +231,10 @@ const styles = StyleSheet.create({
     height: 80, 
   },
 
-  mapMarkerContainer: {
+  mapMarkerContainer:
+  {
     width: 100,
     height: 100,
-    backgroundColor: '#000',
-    borderRadius: 10,
     flexDirection: 'column',
     overflow: 'hidden',
     alignItems: 'center'
@@ -245,15 +244,18 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     resizeMode: 'cover',
+    borderRadius: 50
+  
   },
 
   mapMarkerTitle: {
     flex: 1,
     fontFamily: 'Roboto_400Regular',
-    color: '#FFF',
+    color: '#000',
     fontSize: 11,
     lineHeight: 23,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontWeight: 'bold'
   },
 
   itemsContainer: {
