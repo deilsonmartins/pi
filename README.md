@@ -44,6 +44,8 @@ $ yarn
 $ yarn dev
 
 # The server will start on the port:3333 - go to http://localhost:3333 
+
+# Remember to create an .env file at the root of the server with the guidelines described in the .env-example file
 ```
 ### 🛡 Web application
 
