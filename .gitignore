@@ -1,5 +1,6 @@
 web/node_modules
 server/node_modules
+server/.env
 mobile/.expo
 mobile/.expo-shared
 mobile/node_modules
