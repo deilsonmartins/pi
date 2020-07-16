@@ -1,0 +1,24 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "celebrate": "^12.1.1",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "knex": "^0.21.1",
+    "multer": "^1.4.2",
+    "path": "^0.12.7",
+    "sqlite3": "^4.2.0"
+  },
+  "scripts": {
+    "dev": "nodemon src/config/server.js",
+    "knex-seed": "knex --knexfile knexfile.js seed:run",
+    "knex-migrate": "knex --knexfile knexfile.js migrate:latest"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4",
+    "sucrase": "^3.15.0"
+  }
+}
