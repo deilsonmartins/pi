@@ -1,3 +1,20 @@
+<p align="center">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/deilsonmartins/pi?color=%2304D361">
+  
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen">
+</p>
+
+
+## 💻 About the project
+
+𝛑 (pi) - It is a way to connect students looking for private lessons with teachers who offer these classes in their region.
+
+Teachers will be able to register on the web platform.
+
+Students will have access to the mobile application to search for teachers who teach classes of interest.
+
+This project was developed and adapted based on the "ECOLETA" project developed during the ** NLW - Next Level Week ** offered by Rocketseat.
+
 ## 🛠 Technology
 
 The following tools were used in the construction of the project:
